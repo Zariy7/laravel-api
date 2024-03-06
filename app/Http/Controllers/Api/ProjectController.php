@@ -16,4 +16,21 @@ class ProjectController extends Controller
             'response' => $projects_db,
         ]);
     }
+
+    public function show($slug){
+        $project = Project::all()->where('slug', $slug);
+
+        if($project){
+            return response()->json([
+                'success' => true,
+                'response' => $project
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'response' => 'No project found matching query.'
+            ]);
+        }
+    }
 }
