@@ -13,14 +13,14 @@ class NewContact extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $_email_data;
+    public $email_data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($_email_data)
     {
         $this->email_data = $_email_data;
     }
@@ -33,7 +33,7 @@ class NewContact extends Mailable
     public function envelope()
     {
         return new Envelope(
-            replyTo: $this->email_data->address,
+            replyTo: $this->email_data->email,
             subject: 'New Contact',
         );
     }
